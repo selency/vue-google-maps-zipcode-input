@@ -1,6 +1,6 @@
 {
   "name": "vue-google-maps-zipcode-input",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Vue component that manages the complexity of auto-suggesting a zipcode with google maps",
   "main": "dist/zipcode.js",
   "files": [
@@ -26,8 +26,7 @@
   },
   "homepage": "https://github.com/selency/vue-google-maps-zipcode-input#readme",
   "dependencies": {
-    "lodash": "^4.17.11",
-    "vue": "^2.6.10"
+    "lodash": "^4.17.11"
   },
   "devDependencies": {
     "css-loader": "^3.0.0",
@@ -42,5 +41,7 @@
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2"
   },
-  "peerDependencies": {}
+  "peerDependencies": {
+    "vue": "^2.6.10"
+  }
 }
