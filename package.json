@@ -1,6 +1,6 @@
 {
   "name": "vue-google-maps-zipcode-input",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Vue component that manages the complexity of auto-suggesting a zipcode with google maps",
   "main": "dist/zipcode.js",
   "files": [
