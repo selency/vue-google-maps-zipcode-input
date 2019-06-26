@@ -2,7 +2,10 @@
   <div class="wrapper">
     <h1>Vue Google Maps Zipcode Input</h1>
     <div>
-      <Zipcode country="FR"></Zipcode>
+      <p>Locations are logged to console once selected</p>
+      <Zipcode @selected="zipcodeSelected" country="FR">
+        <input v-model="zipcode" type="text" ref="autocomplete">
+      </Zipcode>
     </div>
   </div>
 </template>
@@ -16,6 +19,17 @@
 import Zipcode from './Zipcode.vue';
 
 export default {
+  data() {
+    return {
+      zipcode: '',
+    }
+  },
+  methods: {
+    zipcodeSelected(location) {
+      this.$set(this.$data, 'zipcode', '');
+      console.log(location);
+    },
+  },
   components: {
     Zipcode,
   }

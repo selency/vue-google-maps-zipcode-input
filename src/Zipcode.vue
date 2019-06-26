@@ -1,6 +1,8 @@
 <template>
   <div>
-    <input v-model="zipcode" ref="autocomplete" type="text" placeholder="zipcode">
+    <slot>
+      <input v-model="zipcode" ref="autocomplete" type="text" v-bind:placeholder="placeholder">
+    </slot>
   </div>
 </template>
 
@@ -9,7 +11,8 @@ import { geocode, filterComponents } from './geocode.js';
 
 export default {
   props: {
-    country: {type: String}
+    country: {type: String},
+    placeholder: {type: String, default: 'zipcode'},
   },
   data: function() {
     return {
@@ -20,6 +23,8 @@ export default {
 
   },
   mounted() {
+    var element = this.$scopedSlots.default()[0].context.$refs.autocomplete;
+
     var options = {
       types: ['(regions)'],
     };
@@ -31,7 +36,7 @@ export default {
     }
 
     this.autocomplete = new google
-      .maps.places.Autocomplete(this.$refs.autocomplete, options);
+      .maps.places.Autocomplete(element, options);
 
     this.autocomplete.addListener('place_changed', () => {
       let place = this.autocomplete.getPlace();
@@ -43,14 +48,18 @@ export default {
 
       geocode(latlng).then(results => {
         var zipcode = filterComponents(results, 'postal_code');
+        var city = filterComponents(results, 'locality');
         var country = filterComponents(results, 'country');
 
-        this.$emit('selected', {
+        var location = {
           place,
           latlng,
+          city,
           zipcode,
           country,
-        });
+        };
+
+        this.$emit('selected', location);
       });
 
       this.$set(this.$data, 'zipcode', '');
